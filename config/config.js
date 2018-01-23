@@ -1,6 +1,6 @@
 var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+  rootPath = path.normalize(__dirname + '/..'),
+  env = process.env.NODE_ENV || 'development';
 
 var config = {
   development: {
@@ -9,7 +9,8 @@ var config = {
       name: 'almost-thea-blog-server'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/almost-thea-blog-server-development'
+    db: 'mongodb://localhost/almost-thea-blog-server-development',
+    tokenKey: 'Random_String'
   },
 
   test: {
@@ -18,7 +19,8 @@ var config = {
       name: 'almost-thea-blog-server'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/almost-thea-blog-server-test'
+    db: 'mongodb://localhost/almost-thea-blog-server-test',
+    tokenKey: 'Random_String'
   },
 
   production: {
@@ -27,7 +29,8 @@ var config = {
       name: 'almost-thea-blog-server'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/almost-thea-blog-server-production'
+    db: 'mongodb://localhost/almost-thea-blog-server-production',
+    tokenKey: process.env.TOKEN_KEY
   }
 };
 
