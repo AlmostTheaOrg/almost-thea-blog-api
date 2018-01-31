@@ -3,7 +3,7 @@ var gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   livereload = require('gulp-livereload');
 
-gulp.task('develop', function () {
+gulp.task('serve', function () {
   livereload.listen();
   nodemon({
     script: 'app.js',
@@ -21,5 +21,5 @@ gulp.task('develop', function () {
 });
 
 gulp.task('default', [
-  'develop'
+  'serve'
 ]);

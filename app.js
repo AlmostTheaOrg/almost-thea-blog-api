@@ -1,22 +1,9 @@
 const express = require('express'),
   config = require('./config/config'),
-  glob = require('glob'),
-  mongoose = require('mongoose');
+  database = require('./config/database');
 
-mongoose.Promise = global.Promise;
-mongoose.connect(config.db, { useMongoClient: true });
-let db = mongoose.connection;
-db.on('error', function () {
-  throw new Error('Unable to connect to database at: ' + config.db);
-});
-
-let models = glob.sync(config.root + '/app/models/*.js');
-models.forEach(function (model) {
-  require(model);
-});
-
-let app = express();
-
+const app = express();
+const db = database(config);
 module.exports = require('./config/express')(app, config);
 
 app.listen(config.port, function () {

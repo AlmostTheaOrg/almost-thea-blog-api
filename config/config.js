@@ -9,7 +9,7 @@ var config = {
       name: 'almost-thea-blog-server'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/almost-thea-blog-server-development',
+    db: 'mongodb://localhost/almost-thea-blog-db-dev',
     tokenKey: 'Random_String'
   },
 
@@ -18,8 +18,8 @@ var config = {
     app: {
       name: 'almost-thea-blog-server'
     },
-    port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/almost-thea-blog-server-test',
+    port: process.env.PORT || 3200,
+    db: 'mongodb://localhost/almost-thea-blog-db-test',
     tokenKey: 'Random_String'
   },
 
