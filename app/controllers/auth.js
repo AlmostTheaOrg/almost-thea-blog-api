@@ -34,24 +34,11 @@ function getLoginCheck(user) {
 	return result;
 }
 
-function getRegisterCheck(user) {
-	let result = { errors: [] };
-
-	let usernameValidation = validateField(user.username, 'Username', 6, 30);
-	let emailValidation = validateField(user.email, 'Email', 6, 30);
-	let passwordValidation = validateField(user.password, 'Password', 6, 30);
-
-	result.errors = usernameValidation.errors.concat(emailValidation.errors).concat(passwordValidation.errors);
-
-	result.result = result.errors.length === 0;
-	return result;
-}
-
 module.exports = function (app) {
-	app.use('/user', router);
+	app.use('/auth', router);
 };
 
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, res) => {
 	let user = req.body;
 	let validationResult = getLoginCheck(user);
 
@@ -97,55 +84,3 @@ router.post('/login', (req, res, next) => {
 			console.log(error);
 		});
 });
-
-router.post('/register', (req, res, next) => {
-	let user = req.body;
-
-	let validationResult = getRegisterCheck(user);
-
-	if (!validationResult.result) {
-		res.json(200, {
-			success: false,
-			message: 'Form validation failed!',
-			errors: validationResult.errors
-		});
-		return;
-	}
-
-	User.findOne({
-		$or: [{ 'username': user.username }, { 'email': user.email }]
-	})
-		.then(originalUser => {
-			if (originalUser) {
-				// What a beauty, isn't it?
-				let message = `${originalUser.username === user.username ? 'Username' : 'Email'} is already taken! `;
-
-				res.json(200, {
-					success: false,
-					message: message,
-					errors: []
-				});
-				return;
-			}
-
-			user.salt = encryption.generateSalt();
-			user.password = encryption.hashPassword(user.password, user.salt);
-
-			User.create(user)
-				.then(persistedUser => {
-					res.json(200, {
-						success: true,
-						message: 'You have registered successfully!',
-						errors: []
-					});
-				})
-				.catch(err => {
-					res.json(200, {
-						success: false,
-						message: err.message,
-						errors: err.errors
-					});
-				});
-		});
-}
-);

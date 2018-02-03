@@ -42,7 +42,7 @@ module.exports = function (app, config) {
 	});
 
 	if (app.get('env') === 'development') {
-		app.use(function (err, req, res, next) {
+		app.use(function (err, req, res) {
 			res.status(err.status || 500);
 			res.json({
 				message: err.message,
@@ -52,7 +52,7 @@ module.exports = function (app, config) {
 		});
 	}
 
-	app.use(function (err, req, res, next) {
+	app.use(function (err, req, res) {
 		res.status(err.status || 500);
 		res.json({
 			message: err.message,
