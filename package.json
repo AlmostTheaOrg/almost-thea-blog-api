@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "gulp --serve",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix --ext .js .",
     "test": "NODE_ENV=test mocha --recursive test",
     "test:coverage": "nyc npm test",
     "test:unit": "mocha --recursive test/middleware test/models test/routes",
@@ -29,6 +31,8 @@
   "devDependencies": {
     "chai": "3.5.0",
     "debug": "2.2.0",
+    "eslint": "4.17.0",
+    "eslint-config-google": "^0.9.1",
     "gulp": "3.9.0",
     "gulp-livereload": "3.8.0",
     "gulp-nodemon": "2.0.2",

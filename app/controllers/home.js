@@ -1,12 +1,12 @@
 const express = require('express'),
-  router = express.Router(),
-  mongoose = require('mongoose'),
-  Article = mongoose.model('Article');
+	router = express.Router(),
+	mongoose = require('mongoose'),
+	Article = mongoose.model('Article');
 
 module.exports = function (app) {
-  app.use('/', router);
+	app.use('/', router);
 };
 
 router.get('/', function (req, res, next) {
-  res.json({ response: 'Hello!' });
+	res.json({ response: 'Hello!' });
 });

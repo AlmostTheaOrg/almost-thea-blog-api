@@ -10,7 +10,7 @@ module.exports = function (config) {
 		throw new Error('Unable to connect to database at: ' + config.db);
 	});
 	db.on('open', () => {
-		console.log(`Connected to database sucessfully at [${config.db}]!`);
+		console.log(`Connected to database successfully at [${config.db}]!`);
 	});
 
 	let models = glob.sync(config.root + '/app/models/*.js');
@@ -19,4 +19,4 @@ module.exports = function (config) {
 	});
 
 	return db;
-}
+};
