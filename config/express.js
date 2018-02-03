@@ -7,6 +7,7 @@ const express = require('express'),
 	compress = require('compression'),
 	methodOverride = require('method-override'),
 	title = require('express-title'),
+	helmet = require('helmet'),
 	passport = require('passport');
 
 module.exports = function (app, config) {
@@ -24,6 +25,8 @@ module.exports = function (app, config) {
 	app.use(express.static(config.root + '/public'));
 	app.use(methodOverride());
 	app.use(title());
+	app.use(helmet());
+	app.use(passport.initialize());
 
 	app.use((req, res, next) => {
 		res.title(req.url);

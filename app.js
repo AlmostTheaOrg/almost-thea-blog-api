@@ -1,10 +1,10 @@
 const express = require('express'),
-	config = require('./config/config'),
-	database = require('./config/database');
+	config = require('./config/config');
 
 const app = express();
-const dbConnection = database(config);
-module.exports = require('./config/express')(app, config);
+require('./config/database')(config);
+require('./config/express')(app, config);
+require('./config/passport')(config);
 
 app.listen(config.port, function () {
 	console.log('Express server listening on port ' + JSON.stringify(config.port));

@@ -49,7 +49,6 @@ function registerDefaultUser() {
 	user.salt = encryption.generateSalt();
 	user.password = encryption.hashPassword(user.password, user.salt);
 
-	console.log(user);
 	return User.create(user)
 		.then(value => {
 			return value;

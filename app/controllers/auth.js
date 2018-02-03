@@ -1,11 +1,10 @@
 const express = require('express'),
 	router = express.Router(),
 	mongoose = require('mongoose'),
-	passport = require('passport'),
 	encryption = require('../security/encryption'),
 	jwt = require('jsonwebtoken'),
-	config = require('../../config/config');
-const User = mongoose.model('User');
+	config = require('../../config/config'),
+	User = mongoose.model('User');
 
 function validateField(value, valueName, minLength, maxLength) {
 	let result = { errors: [] };
@@ -51,7 +50,7 @@ router.post('/login', (req, res) => {
 		return;
 	}
 
-	User.find().then(persistedUser => {
+	User.findOne({ username: user.username }).then(persistedUser => {
 		if (!persistedUser) {
 			res.json({
 				success: false,
@@ -70,14 +69,12 @@ router.post('/login', (req, res) => {
 			return;
 		}
 
-		let token = jwt.sign(persistedUser.id, config.tokenKey);
-		persistedUser.token = token;
-		persistedUser.save().then((updatedUser) => {
-			res.sendStatus(200).json({
-				success: true,
-				message: 'You have successfully logged in!',
-				token: updatedUser.token
-			});
+		const payload = { id: persistedUser._id };
+		const token = jwt.sign(payload, config.tokenKey, { expiresIn: '7 days' });
+		res.json({
+			success: true,
+			message: 'You have successfully logged in!',
+			token: token
 		});
 	})
 		.catch((error) => {
