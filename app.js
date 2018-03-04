@@ -10,3 +10,4 @@ app.listen(config.port, function () {
 	console.log('Express server listening on port ' + JSON.stringify(config.port));
 });
 
+module.exports = app;

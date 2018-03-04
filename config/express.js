@@ -8,7 +8,8 @@ const express = require('express'),
 	methodOverride = require('method-override'),
 	title = require('express-title'),
 	helmet = require('helmet'),
-	passport = require('passport');
+	passport = require('passport'),
+	cors = require('cors');
 
 module.exports = function (app, config) {
 	const env = process.env.NODE_ENV || 'development';
@@ -33,7 +34,10 @@ module.exports = function (app, config) {
 		next();
 	});
 
-	const controllers = glob.sync(config.root + '/app/controllers/*.js');
+	app.use(cors());
+
+	// Load all controllers without their specs.
+	const controllers = glob.sync(config.root + '/app/controllers/**/!(*.spec).js');
 	controllers.forEach(function (controller) {
 		require(controller)(app);
 	});

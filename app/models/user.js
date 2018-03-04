@@ -3,9 +3,23 @@ const mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-	username: { type: Schema.Types.String, required: [true, 'Username is required!'], unique: true, minlength: 6, maxlength: 30, path: 'Username is required!' },
-	password: { type: Schema.Types.String, required: [true, 'Password is required!'], minlength: 6 },
-	salt: { type: Schema.Types.String, required: true }
+	username: {
+		type: Schema.Types.String,
+		required: [true, 'Username is required!'],
+		unique: true,
+		minlength: 6,
+		maxlength: 30,
+		path: 'Username is required!'
+	},
+	password: {
+		type: Schema.Types.String,
+		required: [true, 'Password is required!'],
+		minlength: 6
+	},
+	salt: {
+		type: Schema.Types.String,
+		required: true
+	}
 });
 
 UserSchema.method({
@@ -14,4 +28,4 @@ UserSchema.method({
 	}
 });
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

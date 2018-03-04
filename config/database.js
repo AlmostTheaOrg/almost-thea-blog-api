@@ -45,7 +45,7 @@ function isAnyUserRegistered() {
 function registerDefaultUser() {
 	const User = mongoose.model('User');
 
-	let user = { username: process.env.defaultUsername || 'username', password: process.env.defaultPassword || 'password' };
+	let user = { username: process.env.DEFAULT_USERNAME || 'username', password: process.env.DEFAULT_PASSWORD || 'password' };
 	user.salt = encryption.generateSalt();
 	user.password = encryption.hashPassword(user.password, user.salt);
 
