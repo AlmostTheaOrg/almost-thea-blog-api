@@ -1,10 +1,18 @@
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-var PortraitSchema = new Schema({
-	title: Schema.Types.String,
-	imageUrl: Schema.Types.String,
+const PortraitSchema = new Schema({
+	name: {
+		type: Schema.Types.String,
+		required: [true, 'Name is required!'],
+		minlength: 3,
+		maxlength: 30
+	},
+	image: {
+		type: Schema.Types.ObjectId,
+		ref: 'Image',
+		required: [true, 'Image is required!']
+	}
 });
 
-mongoose.model('Portrait', PortraitSchema);
-
+module.exports = mongoose.model('Portrait', PortraitSchema);

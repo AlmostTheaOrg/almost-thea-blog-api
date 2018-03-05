@@ -19,7 +19,9 @@ module.exports = function (app, config) {
 	app.use(favicon(config.root + '/public/img/favicon.ico'));
 	app.use(logger('dev'));
 
-	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(bodyParser.urlencoded({
+		extended: false
+	}));
 	app.use(bodyParser.json());
 	app.use(cookieParser());
 	app.use(compress());
@@ -48,23 +50,12 @@ module.exports = function (app, config) {
 		next(err);
 	});
 
-	if (app.get('env') === 'development') {
-		app.use(function (err, req, res) {
-			res.status(err.status || 500);
-			res.json({
-				message: err.message,
-				error: err,
-				title: 'error'
-			});
-		});
-	}
-
 	app.use(function (err, req, res) {
 		res.status(err.status || 500);
 		res.json({
-			message: err.message,
-			error: err,
-			title: 'error'
+			success: false,
+			message: `Server error: ${err.title}!`,
+			errors: [err.message],
 		});
 	});
 
