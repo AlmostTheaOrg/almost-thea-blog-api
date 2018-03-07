@@ -29,7 +29,7 @@ var config = {
 			name: 'almost-thea-blog-server'
 		},
 		port: process.env.PORT || 3000,
-		db: 'mongodb://localhost/almost-thea-blog-server-production',
+		db: process.env.DB_URL,
 		tokenKey: process.env.TOKEN_KEY
 	}
 };
