@@ -11,7 +11,7 @@ function getLoginCheck(user) {
 		errors: []
 	};
 
-	let usernameValidation = validateField(user.username, 'Username', 6, 30);
+	let usernameValidation = validateField(user.username, 'Username', 5, 30);
 	let passwordValidation = validateField(user.password, 'Password', 6, 30);
 
 	result.errors = usernameValidation.errors.concat(passwordValidation.errors);

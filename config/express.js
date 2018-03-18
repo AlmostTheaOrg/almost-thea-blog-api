@@ -44,6 +44,7 @@ module.exports = function (app, config) {
 
 	// Load all controllers without their specs.
 	const controllers = glob.sync(config.root + '/app/controllers/**/!(*.spec).js');
+	console.log(controllers);
 	controllers.forEach(function (controller) {
 		require(controller)(app);
 	});
