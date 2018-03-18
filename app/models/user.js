@@ -7,7 +7,7 @@ var UserSchema = new Schema({
 		type: Schema.Types.String,
 		required: [true, 'Username is required!'],
 		unique: true,
-		minlength: 6,
+		minlength: 5,
 		maxlength: 30,
 		path: 'Username is required!'
 	},
