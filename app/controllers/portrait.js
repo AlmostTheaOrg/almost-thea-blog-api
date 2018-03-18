@@ -1,4 +1,4 @@
-var express = require('express'),
+const express = require('express'),
 	router = express.Router(),
 	Portrait = require('../models/portrait'),
 	Image = require('../models/image'),
@@ -8,7 +8,7 @@ var express = require('express'),
 	parseFiles = require('../services/file-parser.middleware');
 
 function validatePortraitName(name) {
-	const result = validateField(name);
+	const result = validateField(name, 'name', 3, 30);
 	return result;
 }
 
@@ -42,7 +42,6 @@ router.post('/add', authenticate, parseFiles, (req, res) => {
 			});
 		})
 		.catch((error) => {
-			console.log(error);
 			res.status(error.http_code || 400).send({
 				success: false,
 				message: error.message,
@@ -116,6 +115,6 @@ function updatePortrait(id, editPortraitData, res) {
 	});
 }
 
-module.exports = function (app) {
+module.exports = (app) => {
 	app.use('/api/portrait', router);
 };

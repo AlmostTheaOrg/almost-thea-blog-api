@@ -36,7 +36,11 @@ module.exports = function (app, config) {
 		next();
 	});
 
-	app.use(cors());
+	app.use(cors({
+		'origin': '*',
+		'methods': 'GET,POST,PUT,DELETE',
+		'preflightContinue': true,
+	}));
 
 	// Load all controllers without their specs.
 	const controllers = glob.sync(config.root + '/app/controllers/**/!(*.spec).js');

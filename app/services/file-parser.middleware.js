@@ -9,6 +9,7 @@ module.exports = (request, response, next) => {
 	const formData = {};
 	busboy.on('file', (fieldName, file, fileName, encoding) => {
 		const fileStream = new Readable();
+		fileStream._read = () => { };
 		file.on('data', (data) => {
 			fileStream.push(data, encoding);
 		});
