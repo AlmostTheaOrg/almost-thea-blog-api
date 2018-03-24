@@ -35,7 +35,7 @@ router.post('/add', authenticate, parseFiles, (req, res) => {
 	imageStorageService
 		.upload(data.streams[0])
 		.then((image) => {
-			Image.create({ url: image.url, id: image.public_id }).then((image) => {
+			Image.create({ url: image.secure_url, id: image.public_id }).then((image) => {
 				Portrait.create({ name: data.name, image: image }).then((portrait) => {
 					res.json(portrait);
 				});
@@ -73,7 +73,7 @@ router.put('/edit/:id',
 			});
 
 			imageStorageService.upload(data.streams[0]).then(image => {
-				Image.create({ url: image.url, id: image.public_id })
+				Image.create({ url: image.secure_url, id: image.public_id })
 					.then(image => {
 						portrait.image = image;
 						updatePortrait(req.params.id, portrait, res);

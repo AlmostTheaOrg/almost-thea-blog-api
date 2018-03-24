@@ -36,7 +36,7 @@ router.post('/add',
 		imageStorageService
 			.upload(data.streams[0])
 			.then((image) => {
-				Image.create({ url: image.url, id: image.public_id }).then((image) => {
+				Image.create({ url: image.secure_url, id: image.public_id }).then((image) => {
 					Project.create({ name: data.name, thumbnail: image, photos: [image] }).then((project) => {
 						Project.findById(project.id).populate('thumbnail photos').then(p => {
 							console.log(p);
@@ -64,7 +64,7 @@ router.put('/edit/:id',
 
 		if (data.streams && data.streams.length > 0) {
 			imageStorageService.upload(data.streams[0]).then(image => {
-				Image.create({ url: image.url, id: image.public_id }).then(thumbnail => {
+				Image.create({ url: image.secure_url, id: image.public_id }).then(thumbnail => {
 					Project.findByIdAndUpdate(projectId, {
 						$set: { thumbnail: thumbnail, name: data.name },
 						$push: { photos: thumbnail }
@@ -111,7 +111,7 @@ router.put('/add/:id/photo',
 		imageStorageService
 			.upload(data.streams[0])
 			.then(image => {
-				Image.create({ url: image.url, id: image.public_id }).then((image) => {
+				Image.create({ url: image.secure_url, id: image.public_id }).then((image) => {
 					Project.findByIdAndUpdate(projectId, { $push: { photos: image } }, { new: true }).populate('photos').then(project => {
 						res.json(project);
 					});
