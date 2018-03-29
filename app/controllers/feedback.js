@@ -16,8 +16,8 @@ router.post('/add',
 		const feedback = req.body;
 
 		// TODO: Validate
-		Feedback.create(feedback).then(() => {
-			res.json({ success: true, message: 'Your feedback was successfully saved!' });
+		Feedback.create(feedback).then((feedback) => {
+			res.json({ success: true, message: 'Your feedback was successfully saved!', feedback });
 		});
 	});
 
