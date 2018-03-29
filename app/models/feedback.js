@@ -22,8 +22,10 @@ const FeedbackSchema = new Schema({
 		default: false
 	},
 	datePosted: {
-		type:Schema.Types.Date,
-		default: Date.now()
+		type: Schema.Types.Date,
+		default: function () {
+			return Date.now();
+		}
 	}
 });
 
