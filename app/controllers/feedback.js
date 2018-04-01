@@ -11,7 +11,6 @@ router.get('/all', authenticate,
 	});
 
 router.post('/add',
-	authenticate,
 	(req, res) => {
 		const feedback = req.body;
 
