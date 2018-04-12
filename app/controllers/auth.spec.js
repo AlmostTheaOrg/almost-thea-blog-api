@@ -12,11 +12,15 @@ after((done) => {
 	});
 });
 
+before((done) => {
+	setTimeout(done, 500);
+});
+
 describe('api/login POST', () => {
 	it('should be able to login user default user', (done) => {
 		const user = {
-			username: process.env.DEFAULT_USERNAME,
-			password: process.env.DEFAULT_PASSWORD
+			username: process.env.DEFAULT_USERNAME || 'username',
+			password: process.env.DEFAULT_PASSWORD || 'password'
 		};
 
 		chai.request(app)

@@ -12,7 +12,6 @@ var config = {
 		db: 'mongodb://localhost/almost-thea-blog-db-dev',
 		tokenKey: 'Random_String'
 	},
-
 	test: {
 		root: rootPath,
 		app: {
@@ -22,7 +21,6 @@ var config = {
 		db: 'mongodb://localhost/almost-thea-blog-db-test',
 		tokenKey: 'Random_String'
 	},
-
 	production: {
 		root: rootPath,
 		app: {

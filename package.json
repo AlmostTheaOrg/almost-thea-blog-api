@@ -5,9 +5,9 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "gulp --serve",
-		"lint": "eslint",
+		"lint": "eslint --ext .js .",
 		"lint-fix": "eslint --fix --ext .js .",
-		"test": "NODE_ENV=test DEFAULT_USERNAME=qwerty DEFAULT_PASSWORD=qwerty PORT=3100 mocha --recursive app ",
+		"test": "NODE_ENV=test mocha --recursive app ",
 		"test:coverage": "nyc npm test",
 		"test:unit": "mocha --recursive test/middleware test/models test/routes",
 		"test:integration": "mocha --recursive test/integration"

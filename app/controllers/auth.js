@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
 	let validationResult = getLoginCheck(user);
 
 	if (!validationResult.result) {
-		res.json(401, {
+		res.status(401).json({
 			success: false,
 			message: 'Form validation failed!',
 			errors: validationResult.errors
@@ -40,7 +40,7 @@ router.post('/login', (req, res) => {
 	User.findOne({ username: user.username })
 		.then(persistedUser => {
 			if (!persistedUser) {
-				res.json(401, {
+				res.status(401).json({
 					success: false,
 					message: 'Username or password is invalid!',
 					errors: []
@@ -49,7 +49,7 @@ router.post('/login', (req, res) => {
 			}
 
 			if (persistedUser.password !== encryption.hashPassword(user.password, persistedUser.salt)) {
-				res.json(401, {
+				res.status(401).json({
 					success: false,
 					message: 'Username or password is invalid!',
 					errors: []
