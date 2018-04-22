@@ -21,6 +21,15 @@ var config = {
 		db: 'mongodb://localhost/almost-thea-blog-db-test',
 		tokenKey: 'Random_String'
 	},
+	ci: {
+		root: rootPath,
+		app: {
+			name: 'almost-thea-blog-server'
+		},
+		port: process.env.PORT || 3100,
+		db: process.env.DB_URL,
+		tokenKey: 'CI-wink-wink'
+	},
 	production: {
 		root: rootPath,
 		app: {
