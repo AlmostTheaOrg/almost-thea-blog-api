@@ -1,10 +1,16 @@
 const chai = require('chai'),
 	chaiHttp = require('chai-http'),
 	User = require('../models/user'),
+	authService = require('../services/auth.service'),
 	app = require('../../app');
 
 chai.use(chaiHttp);
 chai.should();
+
+const user = {
+	username: process.env.DEFAULT_USERNAME || 'username',
+	password: process.env.DEFAULT_PASSWORD || 'password'
+};
 
 after((done) => {
 	User.remove({}, () => {
@@ -13,16 +19,13 @@ after((done) => {
 });
 
 before((done) => {
-	setTimeout(done, 500);
+	authService.register(user).then(() => {
+		done();
+	});
 });
 
 describe('api/login POST', () => {
 	it('should be able to login user default user', (done) => {
-		const user = {
-			username: process.env.DEFAULT_USERNAME || 'username',
-			password: process.env.DEFAULT_PASSWORD || 'password'
-		};
-
 		chai.request(app)
 			.post('/api/login')
 			.send(user)
