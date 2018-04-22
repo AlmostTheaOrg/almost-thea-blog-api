@@ -87,7 +87,7 @@ describe('auth service', () => {
 			authService.login({ username: user.username, password: user.password }).then(loginResult => {
 				expect(loginResult.success).to.be.true;
 				expect(loginResult.token).to.exist;
-				expect(loginResult.message).equal('You have successfully logged in');
+				expect(loginResult.message).equal('You have successfully logged in!');
 				done();
 			});
 		});
