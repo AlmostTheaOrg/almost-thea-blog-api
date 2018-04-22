@@ -43,7 +43,7 @@ module.exports = function (app, config) {
 	}));
 
 	// Load all controllers without their specs.
-	const controllers = glob.sync(config.root + '/app/controllers/**/!(*.spec).js');
+	const controllers = glob.sync(config.root + '/app/controllers/**/!(*.spec|*.fixture).js');
 	controllers.forEach(function (controller) {
 		require(controller)(app);
 	});

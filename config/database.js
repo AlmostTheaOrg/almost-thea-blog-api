@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 mongoose.Promise = global.Promise;
 
 module.exports = function (config) {
-	mongoose.connect(config.db, { useMongoClient: true });
+	mongoose.connect(config.db);
 
 	let db = mongoose.connection;
 	db.on('error', function () {
