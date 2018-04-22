@@ -2,14 +2,18 @@ const Feedback = require('../models/feedback'),
 	fixture = require('../controllers/feedback.fixture'),
 	chai = require('chai'),
 	chaiHttp = require('chai-http'),
-	app = require('../../app');
+	readyApp = require('../../app');
 
+let app;
 chai.use(chaiHttp);
 chai.should();
 
 describe('feedback controller', () => {
 	before((done) => {
-		Feedback.create(fixture.feedbacks).then(() => done());
+		Promise.all([
+			Feedback.create(fixture.feedbacks),
+			readyApp.then(ready => app = ready)
+		]).then(() => done());
 	});
 
 	after((done) => {

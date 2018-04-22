@@ -1,9 +1,9 @@
 const chai = require('chai'),
 	chaiHttp = require('chai-http'),
 	User = require('../models/user'),
-	authService = require('../services/auth.service'),
-	app = require('../../app');
+	readyApp = require('../../app');
 
+let app;
 chai.use(chaiHttp);
 chai.should();
 
@@ -18,9 +18,10 @@ after((done) => {
 	});
 });
 
-before((done) => {
-	authService.register(user).then(() => {
-		done();
+before((next) => {
+	readyApp.then(ready => {
+		app = ready;
+		next();
 	});
 });
 
